@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Remains — Documenting Massacres in Jammu & Kashmir</title>
+    <meta name="description" content="A chronological archive of documented massacres in Jammu & Kashmir from 1931 to present.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Memory Remains">
+    <meta property="og:description" content="Documenting Massacres in Jammu & Kashmir">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect fill='%230a0a0a' width='1200' height='630'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia' font-size='72' fill='%23ffffff'%3EMEMORY REMAINS%3C/text%3E%3Crect x='200' y='420' width='800' height='2' fill='%238b0000'/%3E%3C/svg%3E">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='6' fill='%238b0000'/%3E%3C/svg%3E">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-intro: #0a0a0a;
+            --bg-main: #f5f0eb;
+            --bg-counter: #eae5df;
+            --text-primary: #1a1a1a;
+            --text-muted: #666666;
+            --text-light: #999999;
+            --accent: #8b0000;
+            --accent-hover: #a50000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-weight: 300;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* IMAGE SYSTEM STYLES (NOW ALL UNIFIED) */
+        .image-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin-top: 16px;
+            max-width: 480px;
+            width: 100%;
+            border: 1px solid rgba(139, 0, 0, 0.2);
+        }
+
+        .image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.06;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 280px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: filter 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            filter: saturate(0.15) contrast(1.15) brightness(0.8);
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .image-placeholder span {
+            color: #555;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            text-align: center;
+            padding: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .image-caption {
+            margin-top: 8px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            max-width: 480px;
+            letter-spacing: 0.05em;
+        }
+
+        /* Desktop Hover - smooth transitions */
+        @media (hover: hover) {
+            .timeline-event:hover .image-placeholder {
+                filter: saturate(1) contrast(1.02) brightness(0.95);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            .timeline-event:hover .image-placeholder img {
+                transform: scale(1.03);
+            }
+
+            .timeline-event {
+                transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                            transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                            box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .timeline-event:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .image-wrapper, .image-caption { max-width: 100%; }
+            .image-placeholder { height: 200px; }
+        }
+
+        /* SECTION 1: INTRO */
+        .intro {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-intro);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .intro-quote {
+            max-width: 800px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 400;
+            color: #ffffff;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .intro-quote .word {
+            display: inline-block;
+            opacity: 0;
+            animation: wordFadeIn 0.8s ease-out forwards;
+        }
+
+        .intro-quote .word.highlight {
+            color: #DC143C;
+            font-weight: 700;
+            font-style: normal;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        @keyframes wordFadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-subtext {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2.5s forwards;
+            position: relative;
+        }
+
+        .intro-subtext::before,
+        .intro-subtext::after {
+            content: '—';
+            margin: 0 0.8em;
+            opacity: 0.5;
+        }
+
+        .scroll-indicator {
+            margin-top: 3rem;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3s forwards, pulse 3s ease-in-out infinite 3s;
+            letter-spacing: 0.2em;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes pulse { 0%, 100% { opacity: 0.2; transform: translateY(0); } 50% { opacity: 0.6; transform: translateY(4px); } }
+
+        /* GRADIENT BRIDGE */
+        .gradient-bridge {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(from var(--bg-intro), to var(--bg-main));
+            z-index: 10;
+        }
+
+        /* SECTION 2: TIMELINE */
+        .timeline-section {
+            position: relative;
+            padding: 80px 0 120px 0;
+            background-color: var(--bg-main);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--accent);
+        }
+
+        .timeline-event {
+            position: relative;
+            padding-left: 60px;
+            padding-bottom: 120px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .timeline-event.visible { opacity: 1; transform: translateY(0); }
+        .timeline-event:last-child { padding-bottom: 0; }
+
+        /* Timeline dot marker */
+        .timeline-dot {
+            position: absolute;
+            left: -4px;
+            top: 8px;
+            width: 9px;
+            height: 9px;
+            background-color: transparent;
+            border: 1.5px solid #666;
+            border-radius: 50%;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 2;
+        }
+
+        .timeline-event:hover .timeline-dot {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(139, 0, 0, 0.5);
+            transform: scale(1.3);
+        }
+
+        .event-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .event-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* Less AI slop - sharper, more human-crafted feel */
+        .event-content {
+            position: relative;
+            z-index: 1;
+            border-left: 1px solid transparent;
+            padding-left: 1.5rem;
+            transition: border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .timeline-event:hover .event-content {
+            border-left-color: rgba(139, 0, 0, 0.3);
+        }
+
+        .event-location {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .event-deaths-watermark {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(80px, 15vw, 180px);
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.08;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 0;
+            line-height: 1;
+        }
+
+        .event-description { font-size: 1rem; color: var(--text-primary); max-width: 600px; margin-bottom: 1rem; letter-spacing: 0.01em; }
+        .event-source { font-size: 0.7rem; color: var(--text-light); }
+        .event-source a { color: var(--text-muted); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 2px; }
+
+        /* SECTION 3: COUNTER */
+        .counter-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-counter);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .counter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+        }
+
+        .counter-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(60px, 15vw, 200px);
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .counter-label { margin-top: 2rem; font-size: 1rem; color: var(--text-muted); font-style: italic; letter-spacing: 0.02em; }
+
+        /* SECTION 4: FOOTER */
+        .footer { padding: 120px 2rem; text-align: center; background-color: var(--bg-main); }
+        .footer-main { max-width: 600px; margin: 0 auto 3rem auto; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--text-primary); line-height: 1.5; }
+        .footer-sources { max-width: 600px; margin: 0 auto 2rem auto; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .footer-contact { font-size: 0.85rem; color: var(--text-muted); }
+        .footer-contact a { color: var(--accent); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 2px; }
+
+        @media (max-width: 768px) {
+            .timeline::before { left: 8px; }
+            .timeline-event { padding-left: 40px; }
+            .timeline-dot { left: 4px; width: 8px; height: 8px; }
+            .event-deaths-watermark { font-size: 60px; opacity: 0.06; }
+            .footer { padding: 80px 1.5rem; }
+            .footer-main { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <section class="intro">
+        <h1 class="intro-quote" id="introQuote"></h1>
+        <p class="intro-subtext">A documentation of massacres in Jammu &amp; Kashmir</p>
+        <div class="scroll-indicator">∨</div>
+    </section>
+
+    <div class="gradient-bridge"></div>
+
+    <section class="timeline-section">
+        <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section class="counter-section">
+        <div class="counter-number" id="counterNumber">0</div>
+        <p class="counter-label">Documented deaths, The undocumented are uncountable.</p>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-main">Who in the world would not want peace and stability? However, it is important to distinguish between the peace of the graveyard and that of peacefully flowing life and society. The peace that is achieved under the shadows of fear and terror and for which we have to suppress our aspirations and contaminate our minds is not peace but the death warrant.".</p>
+        <p class="footer-sources">Data sourced from Wikipedia, declassified reports, human rights organizations, and survivor testimonies.</p>
+    </footer>
+
+    <script>
+        const massacreData = [
+  {
+    "date": "1865-04-29",
+    "name": "Zaldagar massacre",
+    "location": "Zaldagar, Srinagar, Jammu and Kashmir",
+    "deaths": 28,
+    "description": "Troops of the Dogra Dynasty opened fire on protesting Kashmiri shawl weavers (shawlbafs), killing 28.",
+    "source": "https://en.wikipedia.org/wiki/1865_Zaldagar_massacre"
+  },
+  {
+    "date": "1931-07-13",
+    "name": "1931 Kashmir agitation",
+    "location": "Central Jail area, Srinagar, Jammu and Kashmir",
+    "deaths": 25,
+    "description": "Dogra state forces fired on protesters outside Srinagar Central Jail; 25 people were killed (22 Muslims in police firing and 3 Hindus in related riots).",
+    "source": "https://en.wikipedia.org/wiki/1931_Kashmir_agitation"
+  },
+  {
+    "date": "1947-10",
+    "name": "1947 Jammu massacres",
+    "location": "Jammu province, princely state of Jammu and Kashmir",
+    "deaths": "Approx 100,000",
+    "description": "During the Partition of India, large‑scale killings of Muslims took place in the Jammu region; scholarly estimates of the dead range from about 20,000 to 100,000.",
+    "source": "https://en.wikipedia.org/wiki/1947_Jammu_massacres"
+  },
+  {
+    "date": "1947-11-25",
+    "name": "Mirpur massacre",
+    "location": "Mirpur, Jammu and Kashmir (now Pakistan-administered Kashmir)",
+    "deaths": 18000,
+    "description": "Pakistani raiders and allied forces overran Mirpur; around 18,000 of approximately 25,000 Hindus and Sikhs were killed and about 3,500 wounded.",
+    "source": "https://in.1947partitionarchive.org/node/2132"
+  },
+  {
+    "date": "1947-11",
+    "name": "1947–1948 Rajouri massacre",
+    "location": "Rajouri area, Jammu region, Jammu and Kashmir",
+    "deaths": "30,000",
+    "description": "Pakistani raiders and local rebels captured Rajouri; about 30,000 Hindus and Sikhs were reported killed, wounded or abducted and much of the town destroyed.",
+    "source": "https://en.wikipedia.org/wiki/Rajouri#History"
+  },
+  {
+    "date": "1986-02",
+    "name": "1986 Kashmir riots",
+    "location": "South Kashmir and Sopore, Jammu and Kashmir",
+    "deaths": "80",
+    "description": "Communal violence following political and religious tensions targeted Kashmiri Hindus in parts of the valley; many Hindus were reported killed, though no authoritative death toll is available.",
+    "source": "https://en.wikipedia.org/wiki/Exodus_of_Kashmiri_Hindus"
+  },
+  {
+    "date": "1990-01-21",
+    "name": "Gawakadal massacre",
+    "location": "Gawkadal bridge, Srinagar, Jammu and Kashmir",
+    "deaths": "100)",
+    "description": "Central Reserve Police Force (CRPF) and other Indian paramilitary troops opened fire on a large protest, killing at least 50 civilians; some accounts put the figure above 100.",
+    "source": "https://en.wikipedia.org/wiki/1990_Gawkadal_massacre"
+  },
+  {
+    "date": "1990-01-25",
+    "name": "Handwara massacre",
+    "location": "Handwara, Kupwara district, Jammu and Kashmir",
+    "deaths": 21,
+    "description": "Border Security Force personnel fired on civilians in Handwara town, killing 21 people.",
+    "source": "https://en.wikipedia.org/wiki/1990_Handwara_massacre"
+  },
+  {
+    "date": "1990-03-01",
+    "name": "Zakoora and Tengpora massacre",
+    "location": "Zakura Crossing and Tengpora Bypass, Srinagar, Jammu and Kashmir",
+    "deaths": 47,
+    "description": "Indian security forces fired on Kashmiri Muslim protesters marching towards the UN office to demand a plebiscite, killing 26 at Zakura and 21 at Tengpora.",
+    "source": "https://en.wikipedia.org/wiki/1990_Zakoora_and_Tengpora_massacre"
+  },
+  {
+    "date": "1990-08-08",
+    "name": "Pazipora massacre",
+    "location": "Pazipora village, Kupwara district, Jammu and Kashmir",
+    "deaths": 26,
+    "description": "Indian Army troops carried out a raid in Pazipora, killing at least 26 Kashmiri civilians.",
+    "source": "https://en.wikipedia.org/wiki/1990_Pazipora_massacre"
+  },
+  {
+    "date": "1991-06-11",
+    "name": "Chotta Bazaar massacre",
+    "location": "Chotta Bazaar, downtown Srinagar, Jammu and Kashmir",
+    "deaths": "32",
+    "description": "CRPF personnel opened fire in a crowded market area; Indian police acknowledged at least 18 civilian deaths, while other sources report up to 32 killed.",
+    "source": "https://en.wikipedia.org/wiki/1991_Chotta_Bazaar_massacre"
+  },
+  {
+    "date": "1993-01-06",
+    "name": "Sopore massacre",
+    "location": "Sopore, Baramulla district, Jammu and Kashmir",
+    "deaths": "57",
+    "description": "Border Security Force personnel fired on civilians and set buildings ablaze; at least 43 civilians were killed, with some reports putting the toll as high as 57.",
+    "source": "https://en.wikipedia.org/wiki/1993_Sopore_massacre"
+  },
+  {
+    "date": "1993-08-14",
+    "name": "Kishtwar massacre",
+    "location": "Sarthal area, Kishtwar district, Jammu and Kashmir",
+    "deaths": 16,
+    "description": "Militants stopped a bus and killed 16 Hindu passengers (14 at the scene and 2 who later died of wounds).",
+    "source": "https://en.wikipedia.org/wiki/1993_Kishtwar_massacre"
+  },
+  {
+    "date": "1993-10-22",
+    "name": "Bijbehara massacre",
+    "location": "Bijbehara, Anantnag district, Jammu and Kashmir",
+    "deaths": 51,
+    "description": "Personnel of the 74th Battalion, Border Security Force, fired on a procession protesting the siege of the Hazratbal shrine; Amnesty International reported 51 civilians killed (other sources give slightly lower figures).",
+    "source": "https://en.wikipedia.org/wiki/1993_Bijbehara_massacre"
+  },
+  {
+    "date": "1997-03-21",
+    "name": "Sangrampora massacre",
+    "location": "Sangrampora village, Budgam district, Jammu and Kashmir",
+    "deaths": 7,
+    "description": "Gunmen lined up and shot seven Kashmiri Pandit villagers, all members of a single extended family, in one of the first targeted massacres of Pandits after the main exodus.",
+    "source": "https://en.wikipedia.org/wiki/1997_Sangrampora_massacre"
+  },
+  {
+    "date": "1998-01-25",
+    "name": "Wandhama massacre",
+    "location": "Wandhama village, Ganderbal district, Jammu and Kashmir",
+    "deaths": 23,
+    "description": "Militants entered the village at night and killed 23 Kashmiri Hindus (Pandits), including women and children.",
+    "source": "https://en.wikipedia.org/wiki/1998_Wandhama_massacre"
+  },
+  {
+    "date": "1998-04-17",
+    "name": "Prankote massacre",
+    "location": "Prankote and Dakikote villages, Reasi district (then Udhampur), Jammu and Kashmir",
+    "deaths": 29,
+    "description": "Islamist militants attacked remote Hindu villages and killed 29 people, including 13 women and children; some victims were reportedly beheaded.",
+    "source": "https://en.wikipedia.org/wiki/1998_Prankote_massacre"
+  },
+  {
+    "date": "1998-06-19",
+    "name": "Chapnari massacre",
+    "location": "Chapnari village, Doda district, Jammu and Kashmir",
+    "deaths": 26,
+    "description": "Militants affiliated with Lashkar-e-Taiba and Hizbul Mujahideen killed 26 Hindus, mostly villagers returning from a wedding.",
+    "source": "https://en.wikipedia.org/wiki/1998_Chapnari_massacre"
+  },
+  {
+    "date": "2000-03-20",
+    "name": "Chittisinghpura massacre",
+    "location": "Chittisinghpura village, Anantnag district, Jammu and Kashmir",
+    "deaths": 35,
+    "description": "Gunmen in military-style uniforms rounded up Sikh men in the village and shot 35 of them dead on the eve of U.S. President Bill Clinton's visit to India.",
+    "source": "https://en.wikipedia.org/wiki/Chittisinghpura_massacre"
+  },
+  {
+    "date": "2000-08-01",
+    "name": "2000 Amarnath pilgrimage massacre",
+    "location": "Pahalgam area and other sites in Jammu and Kashmir",
+    "deaths": "105",
+    "description": "A series of coordinated attacks on 1–2 August 2000 targeted Amarnath pilgrims, local residents, and security personnel; official counts list 89 dead, while some reports mention up to 105 killed.",
+    "source": "https://en.wikipedia.org/wiki/2000_Amarnath_pilgrimage_massacre"
+  },
+  {
+    "date": "2001-02-09",
+    "name": "Kot Charwal massacre",
+    "location": "Kot Charwal (Chalwalkote), Rajouri district, Jammu and Kashmir",
+    "deaths": 15,
+    "description": "Militants attacked a Bakarwal (nomadic shepherd) settlement and killed 15 people, including seven children; the youngest victim was four years old.",
+    "source": "https://en.wikipedia.org/wiki/2001_Kot_Charwal_massacre"
+  },
+  {
+    "date": "2001-07-20",
+    "name": "2001 Amarnath pilgrimage massacre",
+    "location": "Sheshnag camp, Anantnag district, Jammu and Kashmir",
+    "deaths": 13,
+    "description": "An attack near the Sheshnag night camp on the Amarnath Yatra route killed 13 people: 8 Hindu pilgrims, 3 Muslim civilians, and 2 security personnel.",
+    "source": "https://en.wikipedia.org/wiki/2001_Amarnath_pilgrimage_massacre"
+  },
+  {
+    "date": "2001-08",
+    "name": "2001 Kishtwar massacres",
+    "location": "Kishtwar district, Jammu and Kashmir",
+    "deaths": 43,
+    "description": "A series of militant attacks on Hindu villagers in Kishtwar district over several months culminated in approximately 43 deaths in multiple incidents.",
+    "source": "https://en.wikipedia.org/wiki/2001_Kishtwar_massacres"
+  },
+  {
+    "date": "2002-03-30",
+    "name": "Raghunath Temple attacks (first 2002 attack)",
+    "location": "Raghunath Temple, Jammu city, Jammu and Kashmir",
+    "deaths": 11,
+    "description": "Gunmen attacked worshippers at the Raghunath Temple complex in March 2002, killing 11 people (including security personnel) and injuring many others.",
+    "source": "https://en.wikipedia.org/wiki/Raghunath_Temple_attacks"
+  },
+  {
+    "date": "2002-05-14",
+    "name": "Kaluchak massacre",
+    "location": "Kaluchak, near Jammu, Jammu and Kashmir",
+    "deaths": 31,
+    "description": "Three Lashkar-e-Taiba militants attacked a passenger bus and then an army family residential area, killing 31 people (3 soldiers, 18 army family members, and 10 other civilians); all three attackers were killed, bringing total fatalities to 34.",
+    "source": "https://en.wikipedia.org/wiki/Kaluchak_massacre"
+  },
+  {
+    "date": "2002-07-13",
+    "name": "Qasim Nagar massacre",
+    "location": "Qasim Nagar on the outskirts of Jammu city, Jammu and Kashmir",
+    "deaths": 29,
+    "description": "Militants attacked a slum area, killing 29 poor Hindu labourers (including many Dalits); some narrative details report 24 killed immediately and additional deaths in hospital.",
+    "source": "https://en.wikipedia.org/wiki/2002_Qasim_Nagar_massacre"
+  },
+  {
+    "date": "2002-07-30",
+    "name": "2002 Amarnath pilgrimage massacre",
+    "location": "Amarnath Yatra route, Jammu and Kashmir",
+    "deaths": 11,
+    "description": "Two attacks on the Amarnath Yatra in 2002—2 pilgrims killed on 30 July and 9 on 6 August—left a total of 11 Hindu pilgrims dead.",
+    "source": "https://en.wikipedia.org/wiki/2002_Amarnath_pilgrimage_massacre"
+  },
+  {
+    "date": "2002-11-24",
+    "name": "Raghunath Temple attacks (second 2002 attack)",
+    "location": "Raghunath Temple, Jammu city, Jammu and Kashmir",
+    "deaths": 14,
+    "description": "A second fidayeen (suicide) assault on the Raghunath Temple complex in November 2002 killed 14 people and injured dozens more; combined with the March attack, 25 people were killed in 2002 at this site.",
+    "source": "https://en.wikipedia.org/wiki/Raghunath_Temple_attacks"
+  },
+  {
+    "date": "2003-03-23",
+    "name": "Nadimarg massacre",
+    "location": "Nadimarg village, Pulwama district, Jammu and Kashmir",
+    "deaths": 24,
+    "description": "Militants wearing army uniforms rounded up Kashmiri Pandit residents in Nadimarg and shot 24 of them dead, including women and children.",
+    "source": "https://en.wikipedia.org/wiki/2003_Nadimarg_massacre"
+  },
+  {
+    "date": "2004-06-26",
+    "name": "Teli Katha massacre",
+    "location": "Teli Katha village, Surankote tehsil, Poonch district, Jammu and Kashmir",
+    "deaths": 12,
+    "description": "Lashkar-e-Taiba militants attacked the largely Muslim Gujjar village of Teli Katha, killing 12 civilians, including children and members of a Village Defence Committee.",
+    "source": "https://en.wikipedia.org/wiki/2004_Teli_Katha_massacre"
+  },
+  {
+    "date": "2006-04-30",
+    "name": "2006 Doda massacre",
+    "location": "Kulhand (Doda district) and Lalon Galla (then Udhampur, now Ramban area), Jammu and Kashmir",
+    "deaths": 57,
+    "description": "On a single night militants killed 22 Hindus in Thawa–Kulhand area of Doda district and 35 Hindus in Lalon Galla in nearby Udhampur district, for a total of 57 civilian deaths.",
+    "source": "https://en.wikipedia.org/wiki/2006_Doda_massacre"
+  },
+  {
+    "date": "2017-07-10",
+    "name": "2017 Amarnath Yatra attack",
+    "location": "Near Anantnag, along the Jammu–Srinagar highway, Jammu and Kashmir",
+    "deaths": 8,
+    "description": "Gunmen attacked a bus carrying Amarnath pilgrims; seven were killed on 10 July 2017 and one more died of injuries on 16 July, bringing total deaths to 8.",
+    "source": "https://en.wikipedia.org/wiki/2017_Amarnath_Yatra_massacre"
+  },
+  {
+    "date": "2019-10-29",
+    "name": "2019 Kulgam massacre",
+    "location": "Kulgam district, Jammu and Kashmir",
+    "deaths": 7,
+    "description": "Militants shot dead seven migrant labourers from West Bengal (Bengali Muslim workers) in a targeted attack.",
+    "source": "https://en.wikipedia.org/wiki/2019_Kulgam_massacre"
+  },
+  {
+    "date": "2025-04-22",
+    "name": "2025 Pahalgam attack",
+    "location": "Baisaran Valley area near Pahalgam, Anantnag district, Jammu and Kashmir",
+    "deaths": 26,
+    "description": "An Islamist terrorist attack on tourists near Pahalgam killed 26 civilians (25 tourists—mostly Hindu, plus one local pony-ride operator). Attackers used automatic rifles; it has been described as the deadliest attack on civilians in India since the 2008 Mumbai attacks.",
+    "source": "https://en.wikipedia.org/wiki/2025_Pahalgam_attack"
+  }
+];
+
+        function animateIntroText() {
+            const quoteText = "The ultimate weakness of violence is that it is a descending spiral, begetting the very thing it seeks to destroy. Instead of diminishing evil, it multiplies it.";
+            const quoteElement = document.getElementById('introQuote');
+            const importantWords = ["weakness", "violence", "descending", "spiral", "destroy", "diminishing", "evil", "multiplies"];
+            const words = quoteText.split(' ');
+            let delay = 0;
+            words.forEach((word) => {
+                const span = document.createElement('span');
+                span.className = 'word';
+                const cleanWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
+                if (importantWords.includes(cleanWord)) span.classList.add('highlight');
+                span.textContent = word + '\u00A0'; 
+                span.style.animationDelay = (2 + delay) + 's';
+                quoteElement.appendChild(span);
+                delay += 0.08;
+            });
+        }
+
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            
+            // Unified mapping for all images - using Assets/Images path
+            const imageMap = {
+                "1931 Kashmir agitation":"Assets/Images/July-13-1931-at-Jamia-Masjid-Srinagar-1.webp",
+                "1947 Jammu massacres":"Assets/Images/image.webp",
+                "Mirpur massacre":"Assets/Images/image-1.webp",
+                "1947–1948 Rajouri massacre": "",
+                "Gawakadal massacre":"Assets/Images/image-2.webp",
+                "Sopore massacre":"Assets/Images/image-3.webp",
+                "Bijbehara massacre": "Assets/Images/image-4.webp",
+                "Chittisinghpura massacre": "Assets/Images/image-5.webp",
+                "2000 Amarnath pilgrimage massacre": "Assets/Images/image-6.webp",
+                "Kaluchak massacre": "Assets/Images/image-7.webp",
+                "Nadimarg massacre": "Assets/Images/image-8.webp",
+                "2006 Doda massacre": "Assets/Images/image-9.webp",
+                "2025 Pahalgam attack": "Assets/Images/image-10.webp"
+            };
+
+            massacreData.forEach((event, index) => {
+                const caption = imageMap[event.name];
+                const eventEl = document.createElement('div');
+                eventEl.className = 'timeline-event';
+
+                // Add timeline dot
+                const dotEl = document.createElement('div');
+                dotEl.className = 'timeline-dot';
+
+                let imageHtml = '';
+                if (caption) {
+                    imageHtml = `
+                        <div class="image-wrapper">
+                            <div class="image-placeholder">
+                                <img src="${caption}" alt="${event.name}" loading="lazy"
+                                     onerror="this.style.display='none'; this.parentElement.innerHTML='<span>[IMAGE MISSING]</span>'">
+                            </div>
+                        </div>
+                        <div class="image-caption">${event.name}</div>
+                    `;
+                }
+                eventEl.innerHTML = `
+                    <div class="event-deaths-watermark">${event.deaths}</div>
+                    <div class="event-content">
+                        <div class="event-date">${event.date}</div>
+                        <h2 class="event-name">${event.name}</h2>
+                        <div class="event-location">${event.location}</div>
+                        <p class="event-description">${event.description}</p>
+                        ${imageHtml}
+                        <div class="event-source">Source: <a href="${event.source}" target="_blank">${event.source}</a></div>
+                    </div>
+                `;
+                eventEl.insertBefore(dotEl, eventEl.firstChild);
+                timeline.appendChild(eventEl);
+            });
+        }
+
+        function setupScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.timeline-event').forEach(event => observer.observe(event));
+        }
+
+        function animateCounter() {
+            const counterEl = document.getElementById('counterNumber');
+            let total = 0;
+            massacreData.forEach(event => {
+                let val = event.deaths;
+                if (typeof val === 'number') total += val;
+                else if (typeof val === 'string') {
+                    let cleanStr = val.replace('–', '-').replace(/,/g, '');
+                    if (cleanStr.includes('-')) cleanStr = cleanStr.split('-')[0];
+                    const match = cleanStr.match(/\d+/);
+                    if (match) total += parseInt(match[0], 10);
+                }
+            });
+            const duration = 4000;
+            const startTime = performance.now();
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const currentCount = Math.floor(total * easeProgress);
+                counterEl.textContent = currentCount.toLocaleString();
+                if (progress < 1) requestAnimationFrame(updateCounter);
+                else counterEl.textContent = total.toLocaleString();
+            }
+            requestAnimationFrame(updateCounter);
+        }
+
+        function setupCounterObserver() {
+            const counterSection = document.querySelector('.counter-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            observer.observe(counterSection);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            animateIntroText();
+            renderTimeline();
+            setupScrollAnimations();
+            setupCounterObserver();
+        });
+    </script>
+</body>
+</html>
